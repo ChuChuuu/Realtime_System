@@ -1,0 +1,9 @@
+number of process : 2
+number of tasks : 5
+Processor 0 :ability--1
+Processor 1 :ability--2
+Task 0:release time--0,exectuion time--3,deadline--5,period--0,preemption--0,type--0
+Task 1:release time--1,exectuion time--2,deadline--7,period--3,preemption--1,type--1
+Task 2:release time--2,exectuion time--4,deadline--9,period--0,preemption--1,type--2
+Task 3:release time--7,exectuion time--1,deadline--15,period--0,preemption--1,type--0
+Task 4:release time--4,exectuion time--3,deadline--12,period--0,preemption--0,type--0
