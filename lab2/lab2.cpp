@@ -22,7 +22,7 @@ struct Task{
 
 int main(){
 	freopen("input-2.txt","r",stdin);
-	freopen("output-2.txt","w",stdout);
+//	freopen("output-2.txt","w",stdout);
 
 	int time = 0;
     int processor_num,task_num,remain_num;
@@ -71,31 +71,18 @@ int main(){
 			}
 
 		}
-		else{
+
+		time++;//!!
+
+		if(nowremain > 0){
 			nowremain--;
 			if(nowremain == 0){
 				task[nowtask].end = time;
 				cout << task[nowtask].end << endl;
 				remain_num--;
-				if(arrive.size() > 0){
-                for( i = 0 ; i < arrive.size() ; i++){
-                    if(arrive.at(i).execution_time < shortest){
-                        shortest = arrive.at(i).execution_time;
-                        j = i;
-                        nowtask = arrive.at(i).id;
-                    }
-                }
-  //              cout << "now task " << nowtask << endl;
-                nowremain = shortest;
-                vector<Task>::iterator it = arrive.begin() + j;
-                arrive.erase(it);
-                task[nowtask].start = time;
-				cout <<task[nowtask].start << " task"<< task[nowtask].id << " ";
-            }
 			}
 		}
 		
-		time ++;
 //		cout << time <<endl;
 
 	}
