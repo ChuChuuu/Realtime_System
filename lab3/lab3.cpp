@@ -19,10 +19,12 @@ struct Task{
 	int start;
 	int end;
 };
+//to record the life of task
 struct Life{
 	int start;
 	int end;
 };
+//use to sort
 bool Risesort( Task a , Task b){
 	return (a.execution_time < b.execution_time);
 }
@@ -33,10 +35,10 @@ int main(){
 
 	int time = 0;
     int processor_num,task_num,remain_num;
-	int shortest,nowtask=-1,oldtask=-2,nowremain=0;
 	int lasttask=0;
 	int time_record = 0;
 	int waiting_t = 0 , hit_num = 0;
+	//ready queue
 	vector <Task> arrive;
 
     scanf("%d %d",&processor_num,&task_num);
@@ -56,16 +58,18 @@ int main(){
 		life[task[i].id].start = -1;
 		life[task[i].id].end = -2;
 	}
-
+//do while until all tasks have been done
 	while(remain_num > 0){
+		//check which task is come
 		for( i = 0 ; i < task_num ; i++){
 			if(task[i].release_time == time){
 				arrive.push_back(task[i]);
 			}
 		}
-		
+		//put the smallest execution time at head
 		sort(arrive.begin(),arrive.end(),Risesort);
-//context switch
+
+		//context switch->lasttask haven't done or now task have executed
 		if(arrive.at(0).id != lasttask && (life[arrive.at(0).id].start >= 0 || life[lasttask].end < 0)){
 			if(life[lasttask].end < 0){
 				cout << time_record <<" task" <<lasttask<< " " <<time<<endl;
@@ -77,13 +81,18 @@ int main(){
 			lasttask = arrive.at(0).id;
 			continue;
 		}
+		//if the start < 0 means the task havent start
 		if(life[arrive.at(0).id].start < 0){
 			life[arrive.at(0).id].start = time;
 		}
 		
+		//time+1 and execution time -1
 		time++;
-		lasttask = arrive.at(0).id;
 		arrive.at(0).execution_time--;
+		//record last task
+		lasttask = arrive.at(0).id;
+
+		//if execution_time = 0 means task done and print the result
 		if(arrive.at(0).execution_time == 0){
 			life[arrive.at(0).id].end = time;
 			remain_num--;
